@@ -1,12 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo</title>
+  </head>
+  <body>
+    <input id="inp" type="text" />
+    <button onclick="addTodo()">Add</button>
+    <ul id="tasks"></ul>
+    <script>
+      function doneTodo(todoRef) {
+        todoRef.style.setProperty("text-decoration", "line-through");
+      }
+
+      function addTodo() {
+        const userInput = document.getElementById("inp");
+        const userTodoText = userInput.value;
+
+        // <li></li>
+        const newTask = document.createElement("li");
+
+        // <span>Task Name</span>
+        const newTaskSpan = document.createElement("span");
+        newTaskSpan.innerText = userTodoText;
+
+        // <button onclick="doneTodo(newTaskSpan)">Done</button>
+        const newTaskDoneBtn = document.createElement("button");
+        newTaskDoneBtn.innerText = "Done";
+        newTaskDoneBtn.onclick = () => doneTodo(newTaskSpan);
+
+        /*
+         * <li>
+         *    <span>Task Name</span>
+         *    <button onclick="doneTodo(newTaskSpan)">Done</button>
+         * </li>
+         */
+        newTask.appendChild(newTaskSpan);
+        newTask.appendChild(newTaskDoneBtn);
+
+        const tasks = document.getElementById("tasks");
+        tasks.appendChild(newTask);
+
+        userInput.value = "";
+      }
+    </script>
+  </body>
 </html>
